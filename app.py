@@ -417,7 +417,7 @@ def clustering_page():
             cluster_df = pd.DataFrame(cluster_rows, columns=['keyword', 'volume', 'cluster_id'])
 
         if st.button("Download Clusters as CSV"):
-            csv_data = cluster_df.to_csv(index=False).encode('utf-8')
+            csv_data = cluster_df.to_csv(index=False, encoding='utf-8-sig')
             st.download_button(label="Download Clusters CSV", data=csv_data, file_name='clusters.csv', mime='text/csv')
 
 def results_page():
@@ -562,7 +562,7 @@ def results_page():
                 'intent': [kw['intent'] for kw in cluster['keywords']]
             }) for cluster in cluster_data], ignore_index=True)
 
-            csv = output_df[['keyword', 'volume', 'cluster_id', 'cluster_name', 'intent', 'dominant_intent', 'cluster_volume']].to_csv(index=False).encode('utf-8')
+            csv = output_df[['keyword', 'volume', 'cluster_id', 'cluster_name', 'intent', 'dominant_intent', 'cluster_volume']].to_csv(index=False, encoding='utf-8-sig')
             st.download_button(label="Download data as CSV", data=csv, file_name='clusters_with_intents.csv', mime='text/csv')
         except Exception as e:
             logging.error(f"Error preparing CSV for download: {e}")
