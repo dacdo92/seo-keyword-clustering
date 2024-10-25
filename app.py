@@ -266,7 +266,9 @@ def scrape_serps(api_key, db_file):
 
         for batch_num in range(num_batches):
             batch_keywords = keywords[batch_num*batch_size : (batch_num+1)*batch_size]
-            payload = [{"q": keyword} for _, keyword in batch_keywords]
+            payload = [{"q": keyword,
+            "gl": "vn",  # Thêm mã quốc gia Việt Nam
+            "hl": "vi"   # Thêm mã ngôn ngữ tiếng Việt} for _, keyword in batch_keywords]
             url = "https://google.serper.dev/search"
             headers = {
                 'X-API-KEY': api_key,
